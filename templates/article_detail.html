@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container col-md-9">
+        <h1> {{ title }} </h1><br>
+        <p>{{ content }}</p>
+    </div>
+    <a href="{{ url_for('delete_article',title= title ) }}">Delete</a>
+{% endblock %}
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/jquery-3.2.0.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <a href="{{ url_for('index') }}" class="navbar-brand">Flask</a>
+    </div>
+</nav>
+
+{% if ID %}
+    User: {{ ID }}
+    <br>
+    <a href="{{ url_for('logout') }}">Log out</a>
+    <br>
+    {% else %}
+    <a href="{{ url_for('login') }}">Log in</a> <br>
+{% endif %}
+
+{% block content %}
+
+{% endblock %}
+
+
+</body>
+</html>
