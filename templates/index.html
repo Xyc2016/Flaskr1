@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <a href="{{ url_for('write_blog') }}">Write Blog
-        <br>
-    </a>
     {% if articles %}
+        <h4>Articles</h4>
         {% for article in articles %}
             <a href="{{ url_for('article_detail',title=article[0]) }}">
                 <strong> {{ article[0] }} </strong>

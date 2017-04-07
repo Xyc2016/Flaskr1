@@ -12,18 +12,22 @@
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <a href="{{ url_for('index') }}" class="navbar-brand">Flask</a>
+        <div class="navbar-header">
+            <a href="{{ url_for('index') }}" class="navbar-brand">Flask</a>
+            {% if ID %}
+                <a href="#" class="navbar-brand ">
+                    {{ ID }}
+                </a>
+                <a href="{{ url_for('logout') }}" class="navbar-brand">Log out</a>
+                <a href="{{ url_for('write_blog') }}" class="navbar-brand">Write blog</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="navbar-brand">Log in</a>
+                <a href="{{ url_for('signin') }}" class="navbar-brand">Sign in</a>
+            {% endif %}
+        </div>
     </div>
 </nav>
 
-{% if ID %}
-    User: {{ ID }}
-    <br>
-    <a href="{{ url_for('logout') }}">Log out</a>
-    <br>
-    {% else %}
-    <a href="{{ url_for('login') }}">Log in</a> <br>
-{% endif %}
 
 {% block content %}
 

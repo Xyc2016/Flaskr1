@@ -12,7 +12,7 @@ app.config['SECRET_KEY'] = 'SECRET_KEY'
 
 @app.before_request
 def Before_Request():
-    g.database = sqlite3.connect('Users_Passwords.db')
+    g.database = sqlite3.connect('User_data.db')
     g.cursor = g.database.cursor()
 
 
@@ -61,7 +61,6 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('ID')
-
     return redirect(url_for('index'))
 
 
@@ -80,6 +79,18 @@ def article_detail():
     article = g.cursor.fetchall()[0]
     return render_template('article_detail.html', title=title, content=article[0], ID=session['ID'])
 
+
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
+    if request.method == 'GET':
+        return render_template('signin.html')
+    else:
+        s = 'INSERT INTO  users VALUES(\''+request.form['ID']+'\',\''+request.form['Password']+'\');'
+        print(s)
+        g.cursor.execute(s)
+        g.cursor.execute('CREATE TABLE '+request.form['ID']+'(title text,content text);')
+        session['ID'] = request.form['ID']
+        return redirect(url_for('index', ID=request.form['ID']))
 
 if __name__ == '__main__':
     app.run()
